@@ -8,19 +8,19 @@ function asyncMethod(message) {
 }
 
 function doStuff() {
-  asyncMethod('do stuff')
-    .then(function() {});
+  return asyncMethod('do stuff');
 }
 
 function validateUser() {
-  asyncMethod('validate User')
-    .then(doStuff);
+  return asyncMethod('validate User');
 }
 
 function findUser() {
-  asyncMethod('Find User')
-    .then(validateUser);
+  return asyncMethod('Find User');
 }
 
 asyncMethod('Open DB Connection')
-  .then(findUser);
+  .then(findUser)
+  .then(validateUser)
+  .then(doStuff)
+  .then(function() {});
