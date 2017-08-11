@@ -7,14 +7,20 @@ function asyncMethod(message) {
   });
 }
 
-asyncMethod('Open DB Connection')
-  .then(function() {
+function doStuff() {
+  asyncMethod('do stuff')
+    .then(function() {});
+}
+
+function validateUser() {
+  asyncMethod('validate User')
+    .then(doStuff);
+}
+
+function findUser() {
   asyncMethod('Find User')
-    .then(function() {
-    asyncMethod('validate User')
-      .then(function(){
-      asyncMethod('do stuff')
-        .then(function() {})
-    })
-  })
-})
+    .then(validateUser);
+}
+
+asyncMethod('Open DB Connection')
+  .then(findUser);
